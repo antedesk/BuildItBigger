@@ -1,5 +1,7 @@
 package it.antedesk.jokeslib;
 
+import java.util.Random;
+
 public class JokeDispatcher {
 
     private final static String[] jokes = {
@@ -11,12 +13,13 @@ public class JokeDispatcher {
             "Can a kangaroo jump higher than the Empire State Building? Of course! The Empire State Building can’t jump!",
             "Why did the math book look so sad? Because it had so many problems!",
             "What do you get when you cross a snowman with a vampire? Frostbite!",
-            "Why can’t you give Elsa a balloon? Because she will let it go!",
+            "Why can't you give Elsa a balloon? Because she will let it go!",
             "What did one wall say to the other wall? I’ll meet you at the corner!"
     };
 
     public static String dispatchJoke(){
-        int jokeId = (int) (Math.random() * 10);
+        Random random = new Random();
+        int jokeId = random.nextInt(10);
         return jokes[jokeId];
     }
 }
