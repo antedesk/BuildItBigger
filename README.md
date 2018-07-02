@@ -1,3 +1,13 @@
+### Credits
+
+Jokes sources: 
+
+- https://short-funny.com/clean-jokes.php#ixzz5K8rCgiNC
+- https://frugalfun4boys.com/2015/04/30/hilarious-jokes-for-kids/
+
+
+
+
 # Gradle for Android and Java Final Project
 
 In this project, you will create an app with multiple flavors that uses
