@@ -1,18 +1,22 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
+import com.udacity.gradle.builditbigger.asynctask.EndpointAsyncTask;
 
 import it.antedesk.androidjokeslib.JokeDisplayerActivity;
-import it.antedesk.jokeslib.JokeDispatcher;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EndpointAsyncTask.AsyncResultListener{
+
+    private String joke = "no jokes! sorry";
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String joke = JokeDispatcher.dispatchJoke();
-        Toast.makeText(this, joke, Toast.LENGTH_LONG).show();
+        new EndpointAsyncTask(this, this).execute();
+    }
+
+    @Override
+    public void forwardAsyncResult(String result) {
+        if(result!= null && !result.isEmpty())
+            joke = result;
         Intent intent = new Intent(MainActivity.this, JokeDisplayerActivity.class);
         intent.putExtra(Intent.EXTRA_TEXT, joke);
         startActivity(intent);
     }
-
-
 }
