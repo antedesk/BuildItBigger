@@ -13,14 +13,18 @@
         android:id="@+id/instructions_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instructions" />
+        android:text="@string/instructions"
+        android:layout_centerInParent="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/instructions_text_view"
         android:onClick="tellJoke"
-        android:text="@string/button_text" />
+        android:text="@string/button_text"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_centerHorizontal="true"
+        tools:ignore="OnClick" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

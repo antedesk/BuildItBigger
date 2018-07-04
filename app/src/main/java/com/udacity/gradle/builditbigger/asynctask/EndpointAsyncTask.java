@@ -16,7 +16,7 @@ public class EndpointAsyncTask extends AsyncTask<Void, Void, String> {
 
     private AsyncResultListener listener;
     private MyApi myApiService = null;
-    private ProgressDialog mProgressDialog;
+    private ProgressDialog mProgressDialog = null;
     private Context context;
 
     public interface AsyncResultListener {
@@ -26,16 +26,19 @@ public class EndpointAsyncTask extends AsyncTask<Void, Void, String> {
     public EndpointAsyncTask(AsyncResultListener listener, Context context) {
         this.listener = listener;
         this.context = context;
-        mProgressDialog = new ProgressDialog(context);
-        mProgressDialog.setMessage("Loading a new joke..");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setCancelable(false);
+        if(context!= null) {
+            mProgressDialog = new ProgressDialog(context);
+            mProgressDialog.setMessage("Loading a new joke..");
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setCancelable(false);
+        }
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        mProgressDialog.show();
+        if (mProgressDialog != null)
+            mProgressDialog.show();
 
     }
 
@@ -68,7 +71,8 @@ public class EndpointAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        mProgressDialog.dismiss();
+        if(mProgressDialog != null)
+            mProgressDialog.dismiss();
 
         if (listener != null)
             listener.forwardAsyncResult(result);
